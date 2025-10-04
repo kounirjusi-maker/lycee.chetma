@@ -859,6 +859,62 @@
         let currentUser = null;
         let currentFileUrl = null;
 
+        // تحميل البيانات من localStorage عند فتح الصفحة
+        function loadDataFromStorage() {
+            const savedUsers = localStorage.getItem('platformUsers');
+            const savedLessons = localStorage.getItem('platformLessons');
+            const savedLinks = localStorage.getItem('platformLinks');
+            const savedDownloads = localStorage.getItem('platformDownloads');
+            const savedCurrentUser = localStorage.getItem('platformCurrentUser');
+
+            if (savedUsers) users = JSON.parse(savedUsers);
+            if (savedLessons) lessons = JSON.parse(savedLessons);
+            if (savedLinks) links = JSON.parse(savedLinks);
+            if (savedDownloads) downloads = parseInt(savedDownloads);
+            if (savedCurrentUser) {
+                currentUser = JSON.parse(savedCurrentUser);
+                // إعادة تحميل لوحة التحكم المناسبة
+                restoreSession();
+            }
+        }
+
+        // حفظ البيانات في localStorage
+        function saveDataToStorage() {
+            localStorage.setItem('platformUsers', JSON.stringify(users));
+            localStorage.setItem('platformLessons', JSON.stringify(lessons));
+            localStorage.setItem('platformLinks', JSON.stringify(links));
+            localStorage.setItem('platformDownloads', downloads.toString());
+            if (currentUser) {
+                localStorage.setItem('platformCurrentUser', JSON.stringify(currentUser));
+            } else {
+                localStorage.removeItem('platformCurrentUser');
+            }
+        }
+
+        // استعادة الجلسة بعد تحديث الصفحة
+        function restoreSession() {
+            if (!currentUser) return;
+
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('registerPage').style.display = 'none';
+            document.getElementById('navBar').style.display = 'block';
+
+            if (currentUser.type === 'teacher') {
+                document.getElementById('teacherDashboard').style.display = 'block';
+                document.getElementById('teacherName').textContent = currentUser.fullName;
+                loadTeacherData();
+            } else {
+                document.getElementById('studentDashboard').style.display = 'block';
+                document.getElementById('studentName').textContent = currentUser.fullName;
+                loadStudentData();
+            }
+        }
+
+        // تحميل البيانات عند فتح الصفحة
+        window.addEventListener('DOMContentLoaded', function() {
+            loadDataFromStorage();
+        });
+
         function showRegister() {
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('registerPage').style.display = 'flex';
@@ -941,6 +997,7 @@
                     type: 'teacher'
                 });
 
+                saveDataToStorage();
                 showAlert('registerAlert', '✅ تم إنشاء حساب الأستاذ بنجاح!', 'success');
                 setTimeout(() => showLogin(), 2000);
             } else {
@@ -964,6 +1021,7 @@
                     type: 'student'
                 });
 
+                saveDataToStorage();
                 showAlert('registerAlert', '✅ تم إنشاء حسابك بنجاح! يمكنك الآن تسجيل الدخول', 'success');
                 setTimeout(() => showLogin(), 2000);
             }
@@ -989,6 +1047,7 @@
 
             if (teacher) {
                 currentUser = teacher;
+                saveDataToStorage();
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('navBar').style.display = 'block';
                 document.getElementById('teacherDashboard').style.display = 'block';
@@ -996,6 +1055,7 @@
                 loadTeacherData();
             } else if (student) {
                 currentUser = student;
+                saveDataToStorage();
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('navBar').style.display = 'block';
                 document.getElementById('studentDashboard').style.display = 'block';
@@ -1008,6 +1068,7 @@
 
         function logout() {
             currentUser = null;
+            saveDataToStorage();
             document.getElementById('loginPage').style.display = 'flex';
             document.getElementById('navBar').style.display = 'none';
             document.getElementById('teacherDashboard').style.display = 'none';
@@ -1044,6 +1105,7 @@
             document.getElementById('lessonDesc').value = '';
             document.getElementById('fileUrl').value = '';
 
+            saveDataToStorage();
             showAlert('teacherAlert', '✅ تم إضافة الدرس بنجاح! سيتلقى جميع التلاميذ إشعاراً.', 'success');
             loadTeacherData();
         }
@@ -1070,6 +1132,7 @@
             document.getElementById('linkTitle').value = '';
             document.getElementById('linkUrl').value = '';
 
+            saveDataToStorage();
             showAlert('teacherAlert', '✅ تم إضافة الرابط بنجاح!', 'success');
             loadTeacherData();
         }
@@ -1077,6 +1140,7 @@
         function deleteLesson(id) {
             if (confirm('هل أنت متأكد من حذف هذا الدرس؟')) {
                 lessons = lessons.filter(l => l.id !== id);
+                saveDataToStorage();
                 showAlert('teacherAlert', '✅ تم حذف الدرس بنجاح!', 'success');
                 loadTeacherData();
             }
@@ -1085,6 +1149,7 @@
         function deleteLink(id) {
             if (confirm('هل أنت متأكد من حذف هذا الرابط؟')) {
                 links = links.filter(l => l.id !== id);
+                saveDataToStorage();
                 showAlert('teacherAlert', '✅ تم حذف الرابط بنجاح!', 'success');
                 loadTeacherData();
             }
@@ -1095,6 +1160,7 @@
             if (lesson) {
                 lesson.downloads++;
                 downloads++;
+                saveDataToStorage();
                 openModal(lesson);
                 
                 if (currentUser.type === 'teacher') {
