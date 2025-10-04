@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التعليم الثانوي - علوم تجريبية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Segoe UI', sans-serif;
+            background: #f4f6f9;
+            direction: rtl;
+            color: #333;
+        }
+
+        /* Header Style */
+        .top-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .logo-section p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .header-actions button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .header-actions button:hover {
+            background: white;
+            color: #1e3c72;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: white;
+            border-bottom: 3px solid #1e3c72;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 0;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #1e3c72;
+            border-bottom-color: #1e3c72;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Auth Pages */
+        .auth-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 200px);
+            padding: 20px;
+        }
+
+        .auth-box {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .auth-box h2 {
+            color: #1e3c72;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 24px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #1e3c72;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 15px;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #1e3c72;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 15px;
+            background: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #2a5298;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30,60,114,0.3);
+        }
+
+        .switch-auth {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .switch-auth a {
+            color: #1e3c72;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .switch-auth a:hover {
+            text-decoration: underline;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+        }
+
+        .welcome-section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-right: 5px solid #1e3c72;
+        }
+
+        .welcome-section h2 {
+            color: #1e3c72;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .welcome-section p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 4px solid #1e3c72;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .stat-card .icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+
+        .stat-card p {
+            color: #1e3c72;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        /* Content Section */
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .content-card h3 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Upload Form */
+        .upload-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px dashed #d0d0d0;
+        }
+
+        /* Lessons List */
+        .lesson-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            border-right: 4px solid transparent;
+        }
+
+        .lesson-item:hover {
+            border-right-color: #1e3c72;
+            background: #e8f0ff;
+            transform: translateX(-5px);
+        }
+
+        .lesson-info {
+            flex: 1;
+        }
+
+        .lesson-info h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .lesson-info p {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #1e3c72;
+            color: white;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .lesson-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-view {
+            padding: 10px 20px;
+            background: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-view:hover {
+            background: #2a5298;
+            transform: scale(1.05);
+        }
+
+        .btn-delete {
+            padding: 10px 20px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+            transform: scale(1.05);
+        }
+
+        /* Links */
+        .link-item {
+            background: #e8f4fd;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-right: 4px solid #0277bd;
+            transition: all 0.3s;
+        }
+
+        .link-item:hover {
+            background: #d1e7f8;
+            transform: translateX(-5px);
+        }
+
+        .link-item a {
+            color: #0277bd;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .link-item a:hover {
+            text-decoration: underline;
+        }
+
+        .link-meta {
+            color: #666;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border-right: 4px solid #28a745;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border-right: 4px solid #dc3545;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-right: 4px solid #17a2b8;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border-right: 4px solid #ffc107;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 1% auto;
+            padding: 0;
+            width: 95%;
+            max-width: 1400px;
+            height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+            animation: slideDown 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            padding: 20px 30px;
+            background: #1e3c72;
+            color: white;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .modal-actions button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            background: white;
+            color: #1e3c72;
+            font-size: 14px;
+        }
+
+        .modal-actions button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(255,255,255,0.3);
+        }
+
+        .close-modal {
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            transition: transform 0.2s;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 0;
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+        }
+
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-body video {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .file-preview {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .file-preview p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state .icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <h1>📚 منصة التعليم الثانوي</h1>
+                <p>السنة الثانية علوم تجريبية - مادة الاجتماعيات</p>
+            </div>
+            <div class="header-actions" id="headerActions">
+                <!-- سيتم إضافة الأزرار هنا -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar" id="navBar" style="display: none;">
+        <div class="nav-content">
+            <div class="nav-links" id="navLinks">
+                <!-- سيتم إضافة الروابط هنا -->
+            </div>
+            <button class="btn-primary" onclick="logout()" style="width: auto; padding: 8px 20px;">تسجيل الخروج</button>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="loginPage" class="auth-wrapper">
+        <div class="auth-box">
+            <h2>تسجيل الدخول</h2>
+            <div id="loginAlert" class="alert"></div>
+            <div class="form-group">
+                <label>اسم المستخدم</label>
+                <input type="text" id="loginUsername" placeholder="أدخل اسم المستخدم">
+            </div>
+            <div class="form-group">
+                <label>كلمة المرور</label>
+                <input type="password" id="loginPassword" placeholder="أدخل كلمة المرور">
+            </div>
+            <button class="btn-primary" onclick="login()">دخول</button>
+            <div class="switch-auth">
+                ليس لديك حساب؟ <a onclick="showRegister()">سجل الآن</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Page -->
+    <div id="registerPage" class="auth-wrapper" style="display: none;">
+        <div class="auth-box">
+            <h2>إنشاء حساب جديد</h2>
+            <div id="registerAlert" class="alert"></div>
+            
+            <div class="form-group">
+                <label>نوع الحساب</label>
+                <select id="registerType" onchange="toggleTeacherCode()">
+                    <option value="student">تلميذ</option>
+                    <option value="teacher">أستاذ</option>
+                </select>
+            </div>
+
+            <div id="teacherCodeSection" style="display: none;">
+                <div class="alert alert-warning" style="display: block;">
+                    <strong>⚠️ تنبيه:</strong> كود الأستاذ هو رمز سري خاص بالأساتذة فقط. يجب الحصول عليه من إدارة المدرسة.
+                </div>
+                <div class="form-group">
+                    <label>كود الأستاذ السري</label>
+                    <input type="password" id="teacherCode" placeholder="أدخل الكود السري للأساتذة">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>الاسم الكامل</label>
+                <input type="text" id="registerFullName" placeholder="أدخل الاسم الكامل">
+            </div>
+
+            <div class="form-group" id="classSection">
+                <label>القسم</label>
+                <select id="registerClass">
+                    <option value="">اختر القسم</option>
+                    <option value="2SE-A">2 علوم تجريبية - القسم أ</option>
+                    <option value="2SE-B">2 علوم تجريبية - القسم ب</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>اسم المستخدم</label>
+                <input type="text" id="registerUsername" placeholder="اختر اسم مستخدم">
+            </div>
+
+            <div class="form-group">
+                <label>كلمة المرور</label>
+                <input type="password" id="registerPassword" placeholder="اختر كلمة مرور قوية">
+            </div>
+
+            <div class="form-group">
+                <label>تأكيد كلمة المرور</label>
+                <input type="password" id="registerConfirmPassword" placeholder="أعد إدخال كلمة المرور">
+            </div>
+
+            <button class="btn-primary" onclick="register()">إنشاء الحساب</button>
+            <div class="switch-auth">
+                لديك حساب بالفعل؟ <a onclick="showLogin()">تسجيل الدخول</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teacher Dashboard -->
+    <div id="teacherDashboard" class="dashboard">
+        <div class="container">
+            <div class="welcome-section">
+                <h2>مرحباً أستاذ <span id="teacherName"></span></h2>
+                <p>لوحة التحكم - إدارة الدروس والمحتوى التعليمي</p>
+            </div>
+
+            <div id="teacherAlert" class="alert"></div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="icon">📚</div>
+                    <h3>إجمالي الدروس</h3>
+                    <p id="totalLessons">0</p>
+                </div>
+                <div class="stat-card">
+                    <div class="icon">🔗</div>
+                    <h3>إجمالي الروابط</h3>
+                    <p id="totalLinks">0</p>
+                </div>
+                <div class="stat-card">
+                    <div class="icon">👥</div>
+                    <h3>عدد التلاميذ المسجلين</h3>
+                    <p id="totalStudents">0</p>
+                </div>
+                <div class="stat-card">
+                    <div class="icon">📥</div>
+                    <h3>إجمالي المشاهدات</h3>
+                    <p id="totalDownloads">0</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h3>➕ إضافة درس جديد</h3>
+                <div class="upload-section">
+                    <div class="form-group">
+                        <label>عنوان الدرس</label>
+                        <input type="text" id="lessonTitle" placeholder="مثال: الثورة الصناعية">
+                    </div>
+                    <div class="form-group">
+                        <label>وصف الدرس</label>
+                        <input type="text" id="lessonDesc" placeholder="وصف مختصر عن الدرس">
+                    </div>
+                    <div class="form-group">
+                        <label>نوع الملف</label>
+                        <select id="fileType">
+                            <option value="pdf">📄 PDF</option>
+                            <option value="image">🖼️ صورة</option>
+                            <option value="video">🎬 فيديو</option>
+                            <option value="youtube">📺 فيديو يوتيوب</option>
+                            <option value="document">📝 مستند</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>رابط الملف</label>
+                        <input type="text" id="fileUrl" placeholder="أدخل رابط الملف أو فيديو يوتيوب">
+                        <p style="color: #666; font-size: 12px; margin-top: 5px;">
+                            💡 لفيديو يوتيوب: انسخ رابط الفيديو كاملاً
+                        </p>
+                    </div>
+                    <button class="btn-primary" onclick="addLesson()">إضافة الدرس</button>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h3>➕ إضافة رابط مفيد</h3>
+                <div class="upload-section">
+                    <div class="form-group">
+                        <label>عنوان الرابط</label>
+                        <input type="text" id="linkTitle" placeholder="مثال: موقع تعليمي مفيد">
+                    </div>
+                    <div class="form-group">
+                        <label>الرابط</label>
+                        <input type="text" id="linkUrl" placeholder="https://example.com">
+                    </div>
+                    <button class="btn-primary" onclick="addLink()">إضافة الرابط</button>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h3>📚 الدروس المتاحة</h3>
+                <div id="teacherLessonsList"></div>
+            </div>
+
+            <div class="content-card">
+                <h3>🔗 الروابط المفيدة</h3>
+                <div id="teacherLinksList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Dashboard -->
+    <div id="studentDashboard" class="dashboard">
+        <div class="container">
+            <div class="welcome-section">
+                <h2>مرحباً <span id="studentName"></span></h2>
+                <p>الدروس والمحتوى التعليمي - مادة الاجتماعيات</p>
+            </div>
+
+            <div id="studentAlert" class="alert"></div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="icon">📚</div>
+                    <h3>الدروس المتاحة</h3>
+                    <p id="studentTotalLessons">0</p>
+                </div>
+                <div class="stat-card">
+                    <div class="icon">🔗</div>
+                    <h3>روابط مفيدة</h3>
+                    <p id="studentTotalLinks">0</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h3>📚 الدروس المتاحة</h3>
+                <div id="studentLessonsList"></div>
+            </div>
+
+            <div class="content-card">
+                <h3>🔗 روابط مفيدة</h3>
+                <div id="studentLinksList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- File Viewer Modal -->
+    <div id="fileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle"></h3>
+                <div class="modal-actions">
+                    <button onclick="openInNewTab()" title="فتح في صفحة جديدة">🔗 فتح في صفحة جديدة</button>
+                    <span class="close-modal" onclick="closeModal()">&times;</span>
+                </div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 منصة التعليم الثانوي - جميع الحقوق محفوظة</p>
+    </div>
+
+    <script>
+        const TEACHER_SECRET_CODE = "TEACHER2025";
+        const MAX_STUDENTS = 48;
+
+        let users = {
+            teachers: [],
+            students: []
+        };
+        let lessons = [];
+        let links = [];
+        let downloads = 0;
+        let currentUser = null;
+        let currentFileUrl = null;
+
+        // تحميل البيانات من localStorage عند فتح الصفحة
+        function loadDataFromStorage() {
+            const savedUsers = localStorage.getItem('platformUsers');
+            const savedLessons = localStorage.getItem('platformLessons');
+            const savedLinks = localStorage.getItem('platformLinks');
+            const savedDownloads = localStorage.getItem('platformDownloads');
+            const savedCurrentUser = sessionStorage.getItem('platformCurrentUser');
+
+            if (savedUsers) users = JSON.parse(savedUsers);
+            if (savedLessons) lessons = JSON.parse(savedLessons);
+            if (savedLinks) links = JSON.parse(savedLinks);
+            if (savedDownloads) downloads = parseInt(savedDownloads);
+            if (savedCurrentUser) {
+                currentUser = JSON.parse(savedCurrentUser);
+                // إعادة تحميل لوحة التحكم المناسبة
+                restoreSession();
+            }
+        }
+
+        // حفظ البيانات في localStorage
+        function saveDataToStorage() {
+            localStorage.setItem('platformUsers', JSON.stringify(users));
+            localStorage.setItem('platformLessons', JSON.stringify(lessons));
+            localStorage.setItem('platformLinks', JSON.stringify(links));
+            localStorage.setItem('platformDownloads', downloads.toString());
+            if (currentUser) {
+                sessionStorage.setItem('platformCurrentUser', JSON.stringify(currentUser));
+            } else {
+                sessionStorage.removeItem('platformCurrentUser');
+            }
+        }
+
+        // استعادة الجلسة بعد تحديث الصفحة
+        function restoreSession() {
+            if (!currentUser) return;
+
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('registerPage').style.display = 'none';
+            document.getElementById('navBar').style.display = 'block';
+
+            if (currentUser.type === 'teacher') {
+                document.getElementById('teacherDashboard').style.display = 'block';
+                document.getElementById('teacherName').textContent = currentUser.fullName;
+                loadTeacherData();
+            } else {
+                document.getElementById('studentDashboard').style.display = 'block';
+                document.getElementById('studentName').textContent = currentUser.fullName;
+                loadStudentData();
+            }
+        }
+
+        // تحميل البيانات عند فتح الصفحة
+        window.addEventListener('DOMContentLoaded', function() {
+            loadDataFromStorage();
+        });
+
+        function showRegister() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('registerPage').style.display = 'flex';
+        }
+
+        function showLogin() {
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('registerPage').style.display = 'none';
+        }
+
+        function toggleTeacherCode() {
+            const type = document.getElementById('registerType').value;
+            const teacherCodeSection = document.getElementById('teacherCodeSection');
+            const classSection = document.getElementById('classSection');
+            
+            if (type === 'teacher') {
+                teacherCodeSection.style.display = 'block';
+                classSection.style.display = 'none';
+            } else {
+                teacherCodeSection.style.display = 'none';
+                classSection.style.display = 'block';
+            }
+        }
+
+        function showAlert(elementId, message, type) {
+            const alert = document.getElementById(elementId);
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            alert.style.display = 'block';
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 4000);
+        }
+
+        function register() {
+            const type = document.getElementById('registerType').value;
+            const fullName = document.getElementById('registerFullName').value;
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+
+            if (!fullName || !username || !password || !confirmPassword) {
+                showAlert('registerAlert', '❌ الرجاء ملء جميع الحقول', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showAlert('registerAlert', '❌ كلمات المرور غير متطابقة', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showAlert('registerAlert', '❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'error');
+                return;
+            }
+
+            if (users.teachers.some(u => u.username === username) || 
+                users.students.some(u => u.username === username)) {
+                showAlert('registerAlert', '❌ اسم المستخدم موجود بالفعل. اختر اسماً آخر', 'error');
+                return;
+            }
+
+            if (type === 'teacher') {
+                const teacherCode = document.getElementById('teacherCode').value;
+                
+                if (teacherCode !== TEACHER_SECRET_CODE) {
+                    showAlert('registerAlert', '❌ كود الأستاذ غير صحيح! يجب الحصول على الكود من إدارة المدرسة.', 'error');
+                    return;
+                }
+
+                if (users.teachers.length >= 1) {
+                    showAlert('registerAlert', '❌ عذراً، تم تسجيل حساب أستاذ بالفعل للمنصة.', 'error');
+                    return;
+                }
+
+                users.teachers.push({
+                    username: username,
+                    password: password,
+                    fullName: fullName,
+                    type: 'teacher'
+                });
+
+                saveDataToStorage();
+                showAlert('registerAlert', '✅ تم إنشاء حساب الأستاذ بنجاح!', 'success');
+                setTimeout(() => showLogin(), 2000);
+            } else {
+                const studentClass = document.getElementById('registerClass').value;
+                
+                if (!studentClass) {
+                    showAlert('registerAlert', '❌ الرجاء اختيار القسم', 'error');
+                    return;
+                }
+
+                if (users.students.length >= MAX_STUDENTS) {
+                    showAlert('registerAlert', '❌ عذراً، تم الوصول للحد الأقصى من التلاميذ المسجلين (48 تلميذ)', 'error');
+                    return;
+                }
+
+                users.students.push({
+                    username: username,
+                    password: password,
+                    fullName: fullName,
+                    class: studentClass,
+                    type: 'student'
+                });
+
+                saveDataToStorage();
+                showAlert('registerAlert', '✅ تم إنشاء حسابك بنجاح! يمكنك الآن تسجيل الدخول', 'success');
+                setTimeout(() => showLogin(), 2000);
+            }
+
+            document.getElementById('registerFullName').value = '';
+            document.getElementById('registerUsername').value = '';
+            document.getElementById('registerPassword').value = '';
+            document.getElementById('registerConfirmPassword').value = '';
+            document.getElementById('teacherCode').value = '';
+        }
+
+        function login() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (!username || !password) {
+                showAlert('loginAlert', '❌ الرجاء إدخال اسم المستخدم وكلمة المرور', 'error');
+                return;
+            }
+
+            const teacher = users.teachers.find(u => u.username === username && u.password === password);
+            const student = users.students.find(u => u.username === username && u.password === password);
+
+            if (teacher) {
+                currentUser = teacher;
+                saveDataToStorage();
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('navBar').style.display = 'block';
+                document.getElementById('teacherDashboard').style.display = 'block';
+                document.getElementById('teacherName').textContent = teacher.fullName;
+                loadTeacherData();
+            } else if (student) {
+                currentUser = student;
+                saveDataToStorage();
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('navBar').style.display = 'block';
+                document.getElementById('studentDashboard').style.display = 'block';
+                document.getElementById('studentName').textContent = student.fullName;
+                loadStudentData();
+            } else {
+                showAlert('loginAlert', '❌ اسم المستخدم أو كلمة المرور غير صحيحة', 'error');
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            saveDataToStorage();
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('navBar').style.display = 'none';
+            document.getElementById('teacherDashboard').style.display = 'none';
+            document.getElementById('studentDashboard').style.display = 'none';
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+        }
+
+        function addLesson() {
+            const title = document.getElementById('lessonTitle').value;
+            const desc = document.getElementById('lessonDesc').value;
+            const fileType = document.getElementById('fileType').value;
+            const fileUrl = document.getElementById('fileUrl').value;
+
+            if (!title || !desc || !fileUrl) {
+                showAlert('teacherAlert', '❌ الرجاء ملء جميع الحقول', 'error');
+                return;
+            }
+
+            const lesson = {
+                id: Date.now(),
+                title: title,
+                description: desc,
+                fileType: fileType,
+                fileUrl: fileUrl,
+                date: new Date().toLocaleDateString('ar-DZ'),
+                addedBy: currentUser.fullName,
+                downloads: 0
+            };
+
+            lessons.push(lesson);
+            
+            document.getElementById('lessonTitle').value = '';
+            document.getElementById('lessonDesc').value = '';
+            document.getElementById('fileUrl').value = '';
+
+            saveDataToStorage();
+            showAlert('teacherAlert', '✅ تم إضافة الدرس بنجاح! سيتلقى جميع التلاميذ إشعاراً.', 'success');
+            loadTeacherData();
+        }
+
+        function addLink() {
+            const title = document.getElementById('linkTitle').value;
+            const url = document.getElementById('linkUrl').value;
+
+            if (!title || !url) {
+                showAlert('teacherAlert', '❌ الرجاء ملء جميع الحقول', 'error');
+                return;
+            }
+
+            const link = {
+                id: Date.now(),
+                title: title,
+                url: url,
+                date: new Date().toLocaleDateString('ar-DZ'),
+                addedBy: currentUser.fullName
+            };
+
+            links.push(link);
+            
+            document.getElementById('linkTitle').value = '';
+            document.getElementById('linkUrl').value = '';
+
+            saveDataToStorage();
+            showAlert('teacherAlert', '✅ تم إضافة الرابط بنجاح!', 'success');
+            loadTeacherData();
+        }
+
+        function deleteLesson(id) {
+            if (confirm('هل أنت متأكد من حذف هذا الدرس؟')) {
+                lessons = lessons.filter(l => l.id !== id);
+                saveDataToStorage();
+                showAlert('teacherAlert', '✅ تم حذف الدرس بنجاح!', 'success');
+                loadTeacherData();
+            }
+        }
+
+        function deleteLink(id) {
+            if (confirm('هل أنت متأكد من حذف هذا الرابط؟')) {
+                links = links.filter(l => l.id !== id);
+                saveDataToStorage();
+                showAlert('teacherAlert', '✅ تم حذف الرابط بنجاح!', 'success');
+                loadTeacherData();
+            }
+        }
+
+        function viewLesson(id) {
+            const lesson = lessons.find(l => l.id === id);
+            if (lesson) {
+                lesson.downloads++;
+                downloads++;
+                saveDataToStorage();
+                openModal(lesson);
+                
+                if (currentUser.type === 'teacher') {
+                    loadTeacherData();
+                } else {
+                    loadStudentData();
+                }
+            }
+        }
+
+        function openModal(lesson) {
+            const modal = document.getElementById('fileModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.textContent = lesson.title;
+            currentFileUrl = lesson.fileUrl;
+            
+            let content = '';
+            
+            if (lesson.fileType === 'pdf') {
+                content = `<iframe src="${lesson.fileUrl}"></iframe>`;
+            } else if (lesson.fileType === 'image') {
+                content = `<img src="${lesson.fileUrl}" alt="${lesson.title}">`;
+            } else if (lesson.fileType === 'video') {
+                content = `
+                    <video controls style="max-width: 100%; max-height: 100%;">
+                        <source src="${lesson.fileUrl}" type="video/mp4">
+                        متصفحك لا يدعم عرض الفيديو
+                    </video>
+                `;
+            } else if (lesson.fileType === 'youtube') {
+                const youtubeId = extractYoutubeId(lesson.fileUrl);
+                if (youtubeId) {
+                    content = `<iframe src="https://www.youtube.com/embed/${youtubeId}" allowfullscreen></iframe>`;
+                } else {
+                    content = `
+                        <div class="file-preview">
+                            <p>❌ رابط يوتيوب غير صحيح</p>
+                            <p>يمكنك فتح الرابط في صفحة جديدة من الزر أعلاه</p>
+                        </div>
+                    `;
+                }
+            } else {
+                content = `<iframe src="${lesson.fileUrl}"></iframe>`;
+            }
+            
+            modalBody.innerHTML = content;
+            modal.style.display = 'block';
+        }
+
+        function openInNewTab() {
+            if (currentFileUrl) {
+                window.open(currentFileUrl, '_blank');
+            }
+        }
+
+        function extractYoutubeId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        function closeModal() {
+            document.getElementById('fileModal').style.display = 'none';
+            document.getElementById('modalBody').innerHTML = '';
+            currentFileUrl = null;
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('fileModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        function getFileIcon(fileType) {
+            const icons = {
+                'pdf': '📄',
+                'image': '🖼️',
+                'video': '🎬',
+                'youtube': '📺',
+                'document': '📝'
+            };
+            return icons[fileType] || '📎';
+        }
+
+        function loadTeacherData() {
+            document.getElementById('totalLessons').textContent = lessons.length;
+            document.getElementById('totalLinks').textContent = links.length;
+            document.getElementById('totalStudents').textContent = users.students.length;
+            document.getElementById('totalDownloads').textContent = downloads;
+
+            const lessonsList = document.getElementById('teacherLessonsList');
+            if (lessons.length === 0) {
+                lessonsList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">📚</div>
+                        <p>لا توجد دروس بعد. قم بإضافة أول درس!</p>
+                    </div>
+                `;
+            } else {
+                lessonsList.innerHTML = lessons.map(lesson => `
+                    <div class="lesson-item">
+                        <div class="lesson-info">
+                            <h4>
+                                <span class="badge">${getFileIcon(lesson.fileType)} ${lesson.fileType.toUpperCase()}</span>
+                                ${lesson.title}
+                            </h4>
+                            <p>${lesson.description} | تاريخ الإضافة: ${lesson.date} | المشاهدات: ${lesson.downloads}</p>
+                        </div>
+                        <div class="lesson-actions">
+                            <button class="btn-view" onclick="viewLesson(${lesson.id})">عرض</button>
+                            <button class="btn-delete" onclick="deleteLesson(${lesson.id})">حذف</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const linksList = document.getElementById('teacherLinksList');
+            if (links.length === 0) {
+                linksList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">🔗</div>
+                        <p>لا توجد روابط بعد. قم بإضافة أول رابط!</p>
+                    </div>
+                `;
+            } else {
+                linksList.innerHTML = links.map(link => `
+                    <div class="link-item">
+                        <div>
+                            <a href="${link.url}" target="_blank">${link.title}</a>
+                            <div class="link-meta">تاريخ الإضافة: ${link.date}</div>
+                        </div>
+                        <button class="btn-delete" onclick="deleteLink(${link.id})">حذف</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function loadStudentData() {
+            document.getElementById('studentTotalLessons').textContent = lessons.length;
+            document.getElementById('studentTotalLinks').textContent = links.length;
+
+            const lessonsList = document.getElementById('studentLessonsList');
+            if (lessons.length === 0) {
+                lessonsList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">📚</div>
+                        <p>لا توجد دروس متاحة حالياً</p>
+                    </div>
+                `;
+            } else {
+                lessonsList.innerHTML = lessons.map(lesson => `
+                    <div class="lesson-item">
+                        <div class="lesson-info">
+                            <h4>
+                                <span class="badge">${getFileIcon(lesson.fileType)} ${lesson.fileType.toUpperCase()}</span>
+                                ${lesson.title}
+                            </h4>
+                            <p>${lesson.description} | تاريخ الإضافة: ${lesson.date} | أضافه: ${lesson.addedBy}</p>
+                        </div>
+                        <div class="lesson-actions">
+                            <button class="btn-view" onclick="viewLesson(${lesson.id})">عرض/تحميل</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const linksList = document.getElementById('studentLinksList');
+            if (links.length === 0) {
+                linksList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">🔗</div>
+                        <p>لا توجد روابط متاحة حالياً</p>
+                    </div>
+                `;
+            } else {
+                linksList.innerHTML = links.map(link => `
+                    <div class="link-item">
+                        <div>
+                            <a href="${link.url}" target="_blank">${link.title}</a>
+                            <div class="link-meta">تاريخ الإضافة: ${link.date} | أضافه: ${link.addedBy}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+    </script>
+</body>
+</html>
