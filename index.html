@@ -865,7 +865,7 @@
             const savedLessons = localStorage.getItem('platformLessons');
             const savedLinks = localStorage.getItem('platformLinks');
             const savedDownloads = localStorage.getItem('platformDownloads');
-            const savedCurrentUser = localStorage.getItem('platformCurrentUser');
+            const savedCurrentUser = sessionStorage.getItem('platformCurrentUser');
 
             if (savedUsers) users = JSON.parse(savedUsers);
             if (savedLessons) lessons = JSON.parse(savedLessons);
@@ -885,9 +885,9 @@
             localStorage.setItem('platformLinks', JSON.stringify(links));
             localStorage.setItem('platformDownloads', downloads.toString());
             if (currentUser) {
-                localStorage.setItem('platformCurrentUser', JSON.stringify(currentUser));
+                sessionStorage.setItem('platformCurrentUser', JSON.stringify(currentUser));
             } else {
-                localStorage.removeItem('platformCurrentUser');
+                sessionStorage.removeItem('platformCurrentUser');
             }
         }
 
